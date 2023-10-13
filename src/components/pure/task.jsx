@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Task } from '../../models/task.class';
 
+/* importamos la hoja de estilos de task.scss */
+import "../../styles/task.css";
+
 
 function TaskComponent({ task }) {
   return (
     <div>
-      <h2>
+      <h2 className="task-name">
         Nombre: { task.name }
       </h2>
       <h3>
