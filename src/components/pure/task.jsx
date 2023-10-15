@@ -8,7 +8,7 @@ import "../../styles/task.css";
 
 
 
-function TaskComponent({ task }) {
+function TaskComponent({ task, complete, remove }) {
   
   useEffect(() => {
     console.log('Created Task');
@@ -40,9 +40,9 @@ function TaskComponent({ task }) {
    */
   function taskCompletedIcon() {
     if(task.completed) {
-      return (<i className='bi-toggle-on' style={ {color: 'green'} }></i>)
+      return (<i onClick={() => complete(task)} className='bi-toggle-on task-action' style={ {color: 'green'} }></i>)
     } else {
-      return (<i className='bi-toggle-off' style={ {color: 'grey'} }></i>)
+      return (<i onClick={() => complete(task)} className='bi-toggle-off task-action' style={ {color: 'grey'} }></i>)
     }
   }
   
@@ -60,13 +60,15 @@ function TaskComponent({ task }) {
       <td className='align-middle'>
         {taskCompletedIcon()}
       </td>
-      <i className='bi-trash' style={ {color: 'tomato'} }></i>
+      <i onClick={() => remove(task)} className='bi-trash task-action' style={ {color: 'tomato'} }></i>
     </tr>
   );
 };
 
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task)
+  task: PropTypes.instanceOf(Task).isRequired,
+  complete: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 
