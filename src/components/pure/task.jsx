@@ -4,7 +4,7 @@ import { Task } from '../../models/task.class';
 import { LEVELS } from '../../models/levels.enum';
 
 /* importamos la hoja de estilos de task.scss */
-import "../../styles/task.css";
+import "../../styles/task.scss";
 
 
 
@@ -46,8 +46,17 @@ function TaskComponent({ task, complete, remove }) {
     }
   }
   
+  const taskCompleted = {
+    color: 'gray',
+    textDecoration: 'line-through'
+  }
+
+  const taskPending = {
+    color: 'black'
+  }
+  
   return (
-    <tr className='fw-normal'>
+    <tr className='fw-normal' style={ task.completed ? taskCompleted : taskPending }>
       <th>
         <span className='ms-2'>{task.name}</span>
       </th>
@@ -59,8 +68,8 @@ function TaskComponent({ task, complete, remove }) {
       </td>
       <td className='align-middle'>
         {taskCompletedIcon()}
-      </td>
-      <i onClick={() => remove(task)} className='bi-trash task-action' style={ {color: 'tomato'} }></i>
+        <i onClick={() => remove(task)} className='bi-trash task-action' style={ {color: 'tomato'} }></i>
+      </td> 
     </tr>
   );
 };
